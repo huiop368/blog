@@ -5,10 +5,9 @@
 		<div class="author"></div>
 	</div>
 	<% } %>
-	<% if(theme.author.intro_line1 || theme.author.intro_line2){ %>
+	<% if(theme.links){ %>
 	<section class="info">
-		<p> <%= theme.author.intro_line1 %> <br/>
-			<%= theme.author.intro_line2 %></p>
+        <%- partial('../_widget/links') %>
 	</section>
 	 <% } %>
 	<div class="social-font" class="clearfix">

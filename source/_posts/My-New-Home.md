@@ -1,10 +1,10 @@
-title: My New Home
+title: Welcome
 date: 2015-10-28 11:40:45
-tags:
+tags: Life
 ---
 
 # Welcome to new home :)
 
-Just test synchronous with git.
+Have fan with hexo and github page.
 
-Update for test. :)
+Thanks for hexo and github.
