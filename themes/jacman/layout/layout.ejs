@@ -4,7 +4,7 @@
     <header>
       <%- partial('_partial/header') %>
     </header>
-    <div id="container">
+    <div id="container" class="clearfix">
       <%- partial('_partial/sidebar',{item: page,table: true}) %>
       <%- body %>
     </div>
@@ -19,7 +19,7 @@
         <header>
           <%- partial('_partial/header') %>
         </header>
-        <div id="container">
+        <div id="container" class="clearfix">
           <%- body %>
         </div>
         <footer><%- partial('_partial/footer') %></footer>
@@ -35,7 +35,7 @@
       <header>
         <%- partial('_partial/header') %>
       </header>
-      <div id="container">
+      <div id="container" class="clearfix">
         <%- partial('_partial/search')%>
       </div>
       <footer><%- partial('_partial/footer') %></footer>
@@ -48,7 +48,7 @@
       <header>
         <%- partial('_partial/header') %>
       </header>
-      <div id="container">
+      <div id="container" class="clearfix">
           <%- partial('_partial/tags')%>
       </div>
       <footer><%- partial('_partial/footer') %></footer>
@@ -74,7 +74,7 @@
       <header>
         <%- partial('_partial/header') %>
       </header>
-      <div id="container">
+      <div id="container" class="clearfix">
         <%- body %>
       </div>
       <footer><%- partial('_partial/footer') %></footer>
@@ -87,7 +87,7 @@
     <header>
       <%- partial('_partial/header') %>
     </header>
-    <div id="container">
+    <div id="container" class="clearfix">
       <%- partial('_partial/sidebar',{item: page,table: false}) %>
       <%- body %>
     </div>

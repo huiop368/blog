@@ -34,9 +34,11 @@ $(document).ready(function(){
      a.removeClass('aside-min');
     }, 10);
   });
+    /*
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+    */
   <% if (is_post() && theme.close_aside) { %>
         getSize();
         if (myWidth >= 1024) {
@@ -73,6 +75,7 @@ $(document).ready(function(){
   if(ae.length>0){
    ae.wrap('<div class="video-container" />');
   };
+    /*
   c.click(function(){
     ta.css('display', 'block').addClass('fadeIn');
   });
@@ -82,6 +85,7 @@ $(document).ready(function(){
   $(window).scroll(function(){
     ta.css("top",Math.max(140,320-$(this).scrollTop()));
   });
+    */
 });
 </script>
 <% } %>
