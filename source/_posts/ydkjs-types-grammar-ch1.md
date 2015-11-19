@@ -124,3 +124,45 @@ typeof typeof 42; // "string"
 
 
 ### undefined vs "undeclared"
+
+变量可以没有值，但事实上这时候它的值是`undefined`. 对这种变量执行`typeof`时将得到`"undefined"`:
+
+```js
+var a;
+
+typeof a; // "undefined"
+
+var b = 42;
+var c;
+
+
+// later
+b = c;
+
+typeof b; // "undefined"
+typeof c; // "undefined"
+```
+
+对于大多数开发者来说"undefined"和"undeclared"是同义词, 尽管如此在JS中，他们是两个完全不同的概念。
+
+```js
+var a;
+
+a; // undefined
+b; // ReferenceError: b is not defined
+```
+
+就像你看到得一样，"b is not defined"会让人非常容易的与"b is undefined"混淆。再重复一遍，"undefined"与"is not defined"是完全不同的概念。如果浏览器可以说"b is not found"或者"b is not declared",也许是可以减少疑惑的。
+
+这里还有一个与`typeof`相关的容易产生困惑的行为。
+
+```js
+var a;
+
+typeof a; // "undefined"
+typeof b; // "undefined"
+```
+
+`typeof`都会返回`"undefined"`, 即使是"undeclared"(为声明)的变量。注意这里是不会报错的，当我们执行`typeof b`的时候。这是`typeof`的一种特别的保护措施。
+
+就向上面提到的null类似，如果`typeof`一个为声明的变量，返回"undeclared"可能会更有帮助。
