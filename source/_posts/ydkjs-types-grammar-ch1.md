@@ -165,4 +165,99 @@ typeof b; // "undefined"
 
 `typeof`都会返回`"undefined"`, 即使是"undeclared"(为声明)的变量。注意这里是不会报错的，当我们执行`typeof b`的时候。这是`typeof`的一种特别的保护措施。
 
-就向上面提到的null类似，如果`typeof`一个为声明的变量，返回"undeclared"可能会更有帮助。
+就像上面提到的null类似，如果`typeof`未声明的变量，返回"undeclared"可能会更有帮助。
+
+
+### `typeof` Undeclared
+
+尽管如此，对于浏览器端的JS来说这个保护措施是比较有用的，因为JS文件加载进来的变量是共享global这个命名空间的。
+
+举个简单的例子，想象一下在你的环境中又个"debug"模式，它被一个全局变量`DEBUG`控制着。
+在一个"debug.js"文件里包含了一个全局变量`var DEBUG = true`, 这个文件只会在开发环境中，不会在线上环境。
+
+然而，你必须关心怎么判断`DEBUG`这个变量是否存在。
+
+```js
+// oops, this would throw an error!
+if (DEBUG) {
+    console.log( "Debugging is starting" );
+}
+
+// this is a safe existence check
+if (typeof DEBUG !== "undefined") {
+    console.log( "Debugging is starting" );
+}
+```
+
+这种检查不仅仅对这种变量有用，如果你在检查一个内置的API，你也许会发现这很有用。
+
+```js
+if ( typeof atob === "undefined" ) {
+    atob = function(){ /*..*/ };
+}
+```
+
+还有一种方法不需要用`typeof`去检查变量，在浏览器里面所有的全局变量也是`global`的属性，所以上面的检验也能像下面这样执行:
+
+```js
+if (window.DEBUG) {
+    // ..
+}
+
+if (!window.atob) {
+    // ..
+}
+```
+
+不像未声明的变量那样会抛出异常，如果你访问一个`window`不存在的属性是不会报错的。
+
+另一方面,手动的设置全局变量为`window`的引用是我们应当尽量避免的，特别是当你的代码需要运行在多种JS环境中(不仅仅是浏览器，也可以是node环境),这个时候global就不一定是`window`了。
+
+我们想象一个公共函数，你想其他人可以黏贴到他们的代码中去，这个时候你会想要检查这个方法是否已经被定义过了。
+
+```js
+function doSomethingCool() {
+    var helper =
+        (typeof FeatureXYZ !== "undefined") ?
+        FeatureXYZ :
+        function() { /*.. default feature ..*/ };
+
+    var val = helper();
+    // ..
+}
+```
+
+`doSomethingCool()`检查了一个叫`FeatureXYZ`的方法，如果找到了就用找到的，如果没有找到，就用它自己的。现在，如果有人把这个函数引用到他的模块中, 对于他们的模块定义或者没定义`FeatureXYZ`都是安全的。
+
+```js
+// an IIFE (see "Immediately Invoked Function Expressions"
+// discussion in the *Scope & Closures* title of this series)
+(function(){
+    function FeatureXYZ() { /*.. my XYZ feature ..*/ }
+
+    // include `doSomethingCool(..)`
+    function doSomethingCool() {
+        var helper =
+            (typeof FeatureXYZ !== "undefined") ?
+            FeatureXYZ :
+            function() { /*.. default feature ..*/ };
+
+        var val = helper();
+        // ..
+    }
+
+    doSomethingCool();
+})();
+```
+
+一些开发者可能会比较喜欢一种设计模式叫"依赖注入", 这里就是将`FeatureXYZ`在外面定义，替换为依赖参数传入。
+
+```js
+function doSomethingCool(FeatureXYZ) {
+    var helper = FeatureXYZ ||
+        function() { /*.. default feature ..*/ };
+
+    var val = helper();
+    // ..
+}
+```
