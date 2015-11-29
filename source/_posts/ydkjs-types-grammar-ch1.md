@@ -98,6 +98,8 @@ typeof [1,2,3] === "object"; // true
 仅仅是对象，但是你也可以把它当做是object的子类型(see Chapter 3).
 
 
+<!--more-->
+
 
 ### 值&类型
 在Javascript里，变量(variables)是没有类型的 --- **值有类型**。变量能够持有任何类型的值在任何时候。
