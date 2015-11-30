@@ -113,4 +113,85 @@ var arr = Array.from( arguments );
 
 ### 字符串
 
+这里有个比较通常的说法，字符串有着数组的特性。意识到Javascript中字符串不是真正的和数组特性一样是非常重要的，他们仅仅是表面上又点相似而已。
 
+例如：让我们考虑下这两个值
+
+```js
+var a = "foo";
+var b = ["f","o","o"];
+```
+
+字符串与数组及类数组有一点点的相似，像上面。 他们都有一个`length`属性，一个`indexOf(..)`方法和`concat(..)`方法。
+
+```js
+a.length;                           // 3
+b.length;                           // 3
+
+a.indexOf( "o" );                   // 1
+b.indexOf( "o" );                   // 1
+
+var c = a.concat( "bar" );          // "foobar"
+var d = b.concat( ["b","a","r"] );  // ["f","o","o","b","a","r"]
+
+a === c;                            // false
+b === d;                            // false
+
+a;                                  // "foo"
+b;                                  // ["f","o","o"]
+```
+
+所以，他们本质上来说都是数组性？
+
+```js
+a[1] = "O";
+b[1] = "O";
+
+a; // "foo"
+b; // ["f","O","o"]
+```
+
+Javascript中`string`是不可变的，而`array`是易变的。此外，`a[1]`字符位置并不能一直有效。在IE的一些老版本中是不支持这种语法的。作为替代方案可以使用`a.charAt(1)`。
+
+`string`方法都不会改变它本身，而都是return新的`string`对象，但`array`的方法都会改变数组本身。
+
+```js
+c = a.toUpperCase();
+a === c;    // false
+a;          // "foo"
+c;          // "FOO"
+
+b.push( "!" );
+b;          // ["f","O","o","!"]
+```
+
+然而，很多`array`的方法对`string`来说都是非常有用的，不过我们可以把`array`的方法带给`string`.
+
+```js
+a.join;         // undefined
+a.map;          // undefined
+
+var c = Array.prototype.join.call( a, "-" );
+var d = Array.prototype.map.call( a, function(v){
+    return v.toUpperCase() + ".";
+} ).join( "" );
+
+c;              // "f-o-o"
+d;              // "F.O.O."
+```
+
+让我们再来看一个例子:
+
+```js
+a.reverse;      // undefined
+
+b.reverse();    // ["!","o","O","f"]
+b;              // ["!","o","O","f"]
+```
+
+不幸的是，上面介绍的方法对`reverse`不适用，因为`string`是不可变的。
+
+```js
+Array.prototype.reverse.call( a );
+// still returns a String object wrapper (see Chapter 3)
+```
