@@ -195,3 +195,82 @@ b;              // ["!","o","O","f"]
 Array.prototype.reverse.call( a );
 // still returns a String object wrapper (see Chapter 3)
 ```
+
+让我们来看看`string`与`array`之间的转换。
+
+```js
+var c = a
+    // split `a` into an array of characters
+    .split( "" )
+    // reverse the array of characters
+    .reverse()
+    // join the array of characters back to a string
+    .join( "" );
+
+c; // "oof"
+```
+
+**Warning:** 这个方法对于复杂的`string`(unicode)是不生效的。
+
+
+### 数字
+
+#### Placeholder
+
+
+### 特殊值
+
+这里有几个比较特别的值需要开发者注意的, 并且适当地使用。
+
+#### 空值
+
+对于`undefined`类型来说，这里只有唯一的一个值:`undefined`. 对于`null`类型来说，也只有唯一的一个值:`null`。
+
+`undefined`和`null`经常被认为是空值或不存在的值. 然而一些开发者倾向于细小的差别来区分他们. 例如:
+
+* `null`是一个空值
+* `undefined`是一个丢失的值
+
+或者
+
+* `undefined`还没有值
+* `null`有值，但这个值什么都不是
+
+Regardless of how you choose to "define" and use these two values, null is a special keyword, not an identifier, and thus you cannot treat it as a variable to assign to (why would you!?). However, undefined is (unfortunately) an identifier. Uh oh.
+(怎么翻都觉得不太对)
+
+
+#### undefined
+
+在non-`strict`的模式下，给global的`undefined`赋值是可能的。
+
+```js
+function foo() {
+    undefined = 2; // really bad idea!
+}
+
+foo();
+```
+
+```js
+function foo() {
+    "use strict";
+    undefined = 2; // TypeError!
+}
+
+foo();
+```
+
+在non-`strict`和`strict`模式下, 尽管如此，你都能够创建一个局部变量`undefined`. 但是这同样是非常糟糕的.
+
+```js
+function foo() {
+    "use strict";
+    var undefined = 2;
+    console.log( undefined ); // 2
+}
+
+foo();
+```
+
+** Friends don't let friends override `undefined` ** . Ever.
