@@ -274,3 +274,56 @@ foo();
 ```
 
 ** Friends don't let friends override `undefined` ** . Ever.
+
+
+### Void 操作符
+
+`void ___`这表达式总是返回`undefined`, 它并不会改变现有的值，仅仅是没有任何值能够从这个表达式返回.
+
+```js
+var a = 42;
+
+console.log( void a, a ); // undefined 42
+```
+
+按照惯例，为了得到`undefined`值，一般我们会用`void 0`(尽管 `void true`和一些其他的void表达式做的是同样的事情), 他们之间是没有什么特别的区别的.
+
+但是在一些情况下，`void`操作符还是比较有帮助的.
+
+例如:
+
+```js
+function doSomething() {
+    // note: `APP.ready` is provided by our application
+    if (!APP.ready) {
+        // try again later
+        return void setTimeout( doSomething, 100 );
+    }
+
+    var result;
+
+    // do some other stuff
+    return result;
+}
+
+// were we able to do it right away?
+if (doSomething()) {
+    // handle next tasks right away
+}
+```
+
+这里, `setTimeout(..)`函数返回一个数字(不同的timer标识，用来取消它), 但是我们希望`if`语句能够有个否定的值，所以用`void`执行了一下.
+
+很多开发者更喜欢把动作分开，不用`void`而达到同样的效果.
+
+```js
+if (!APP.ready) {
+    // try again later
+    setTimeout( doSomething, 100 );
+    return;
+}
+```
+
+一般来说，如果你发现用`undefined`替代其他值能更有帮助的话，那么用`void`操作符. 也许在你的程序里这样的情况不是非常多的，但在一些极少的情况下你一定会需要它的，它会非常有帮助的.
+
+
