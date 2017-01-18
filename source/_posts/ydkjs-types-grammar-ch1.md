@@ -55,6 +55,8 @@ tyoeof null === "object";  // true
 
 如果你想测试`null`的类型，你需要一个复合条件:
 
+<!--more-->
+
 ```js
 var a = null;
 
@@ -98,7 +100,6 @@ typeof [1,2,3] === "object"; // true
 仅仅是对象，但是你也可以把它当做是object的子类型(see Chapter 3).
 
 
-<!--more-->
 
 
 ### 值&类型
