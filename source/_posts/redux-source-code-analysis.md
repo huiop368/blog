@@ -43,3 +43,22 @@ store.dispatch({ type: 'DECREMENT' })
 所以一个redux的过程应该是 createStore -> subscribe -> dispatch
 
 那我们一步一步来看，这些操作到底背后做了什么?
+
+```javascript
+// Redux 入口文件 src/index.js
+
+export {
+  createStore,
+  combineReducers,
+  bindActionCreators,
+  applyMiddleware,
+  compose   
+}
+
+// createStore是核心方法，其他的你可以认为是redux的工具函数
+```
+
+```javascript
+// src/createStore.js
+
+```
