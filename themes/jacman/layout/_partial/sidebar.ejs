@@ -9,6 +9,8 @@
  <% } %>
   </div>
 <% } %>
+
+<% if(theme.toc.side_widgets){ %>
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="<%= __('hidesidebar') %>"></a></div>
 <aside class="clearfix">
@@ -17,3 +19,4 @@
 <% }); %>
 </aside>
 </div>
+<% } %>
