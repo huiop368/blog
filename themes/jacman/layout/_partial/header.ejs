@@ -20,10 +20,11 @@ function root_for(path){
 			<% } %>
 			<div id="textlogo">
 				<h1 class="site-name"><a href="<%- config.root %>" title="<%= config.title %>"><%= config.title %></a></h1>
-				<h2 class="blog-motto"><% if (config.subtitle){ %><%= config.subtitle %><% } %></h2>
+                <% if (config.subtitle){ %>
+				    <h2 class="blog-motto"><%= config.subtitle %></h2>
+                <% } %>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="<%= __('menu') %>">
-			</a></div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="<%= __('menu') %>"></a></div>
 			<nav class="animated">
 				<ul>
 					<ul>

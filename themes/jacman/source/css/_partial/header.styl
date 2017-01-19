@@ -1,25 +1,24 @@
 body
   >header
     width 100%
-    box-shadow 2px 4px 5px hsla(0,1%,1%,.2)
     if(banner_img)
-      background url("../"+banner-img) center color-theme
+      background url("../"+banner-img) center color-white
     else
-      background color-theme
-    color color-white
-    padding 1em 0 0.8em 
+      background color-white
+    color color-dawn
+    padding 0.5em 0 0.5em 
+    border-bottom 1px solid #d5d5d5
     @media tablet
-      padding 1.8em 0 1.5em
+      padding 1em 0 1em
     >div
-      width 95%
+      width 98%
       margin 0 auto
       position relative
       overflow hidden
       @media tablet
-        width 93%
+        width 98%
     a
       display block
-      color color-white
 
 #imglogo
   float left
@@ -39,19 +38,19 @@ body
 
 #textlogo
   float left
-  width 75%
+  width 50%
   margin-left 0.5em
   h1.site-name
     width 86%
     if ShowCustomFont
-      font-family font-custom-family
+      font-family font-new-custom-family
       font-size font-size+100
       line-height line-height
       font-smoothing()
       @media mini
-        font-size font-size+140
+        font-size font-size+60
       @media tablet
-        font-size font-size+180
+        font-size font-size+100
     else
       font-family font-default
       font-size font-size+60
@@ -61,6 +60,8 @@ body
         font-size font-size+90
       @media tablet
         font-size font-size+120
+    a
+      color color-dblue
   h2.blog-motto
     font-size 0.7em
     font-weight normal
@@ -94,7 +95,6 @@ header nav
   @media tablet
     float right
     width auto
-    margin-top 1em
     max-height none
   font-size font-size+12.5
   padding-top 0.5em
